@@ -1,5 +1,20 @@
 ![alt text](https://fourtf.com/img/chatterino-icon-64.png)
-Chatterino 2 [![GitHub Actions Build (Windows, Ubuntu, MacOS)](https://github.com/Chatterino/chatterino2/workflows/Build/badge.svg?branch=master)](https://github.com/Chatterino/chatterino2/actions?query=workflow%3ABuild+branch%3Amaster) [![Cirrus CI Build (FreeBSD only)](https://api.cirrus-ci.com/github/Chatterino/chatterino2.svg?branch=master)](https://cirrus-ci.com/github/Chatterino/chatterino2/master) [![Chocolatey Package](https://img.shields.io/chocolatey/v/chatterino?include_prereleases)](https://chocolatey.org/packages/chatterino) [![Flatpak Package](https://img.shields.io/flathub/v/com.chatterino.chatterino)](https://flathub.org/apps/details/com.chatterino.chatterino)
+Chatterino 2 [![GitHub Actions Build (Windows, Ubuntu, MacOS)](https://github.com/h0ud1n/chatterino2/workflows/Build/badge.svg?branch=master)](https://github.com/h0ud1n/chatterino2/actions?query=workflow%3ABuild+branch%3Amaster)
+============
+
+This is a fork of Chatterino 2 that enables extra features that aren't currently available on the main Chatterino 2 project.
+
+### Features available
+
+- Multicolor username support (Get a random color each message)
+
+### Planned features
+
+- Choose a set of username colors to choose from (Either a specific palette or a list of colors)
+
+- Generate random username colors from a base color of choice (Example: Different shades of green or pink, etc.)
+
+## Original Chatterino 2 Readme
 ============
 
 Chatterino 2 is a chat client for [Twitch.tv](https://twitch.tv).
