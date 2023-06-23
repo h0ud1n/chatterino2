@@ -886,6 +886,9 @@ void GeneralPage::initLayout(GeneralPageView &layout)
         [](auto args) {
             return fuzzyToFloat(args.value, 63.f);
         });
+    layout.addCheckbox(
+        "Enable multicolored username change", s.multicolorMessages, false,
+        "When enabled, your username color changes on every message.");
     layout.addCheckbox("Double click to open links and other elements in chat",
                        s.linksDoubleClickOnly, false,
                        "When enabled, opening links/usercards requires "

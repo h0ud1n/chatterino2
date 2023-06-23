@@ -186,6 +186,7 @@ public:
     /// Behaviour
     BoolSetting allowDuplicateMessages = {"/behaviour/allowDuplicateMessages",
                                           true};
+    BoolSetting multicolorMessages = {"/behaviour/multicolor/enabled", false};
     BoolSetting mentionUsersWithAt = {"/behaviour/mentionUsersWithAt", false};
     BoolSetting showJoins = {"/behaviour/showJoins", false};
     BoolSetting showParts = {"/behaviour/showParts", false};

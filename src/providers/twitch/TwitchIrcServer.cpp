@@ -62,6 +62,8 @@ TwitchIrcServer::TwitchIrcServer()
             std::make_unique<SeventvEventAPI>(SEVENTV_EVENTAPI_URL);
     }
 
+    this->previousUsernameColorValue = 0;
+
     // getSettings()->twitchSeperateWriteConnection.connect([this](auto, auto) {
     // this->connect(); },
     //                                                     this->signalHolder_,
@@ -530,6 +532,60 @@ bool TwitchIrcServer::prepareToSend(TwitchChannel *channel)
     return true;
 }
 
+void usernameColorChangerUtil(int *previousValue)
+{
+    bool multiColor = getSettings()->multicolorMessages;
+    const int MAX_TWITCH_COLORS = 15;
+    const int MIN_VALUE = 100;
+    const int MAX_HUE_VALUE = 360;
+    const int MAX_SAT_VALUE = 255 - MIN_VALUE;
+    const int MAX_VAL_VALUE = 255 - MIN_VALUE;
+
+    if (multiColor)
+    {
+        int previousColor = *previousValue;
+        auto user = getApp()->accounts->twitch.getCurrent();
+        QString userColor = user->color().name();
+
+        int hue = std::rand() % MAX_HUE_VALUE;
+        int sat = MIN_VALUE + std::rand() % MAX_SAT_VALUE;
+        int val = MIN_VALUE + std::rand() % MAX_VAL_VALUE;
+
+        QColor color;
+        color.setHsv(hue, sat, val);
+        QString newColor = color.name();
+
+        getHelix()->updateUserChatColor(
+            user->getUserId(), newColor, [newColor] {},
+            [newColor](auto error, auto message) {});
+
+        QString newUserColor = user->color().name();
+
+        if (newUserColor == userColor)
+        {
+            QString twitchColors[15] = {
+                "blue",      "blue_violet",  "cadet_blue",   "chocolate",
+                "coral",     "dodger_blue",  "firebrick",    "golden_rod",
+                "green",     "hot_pink",     "orange_red",   "red",
+                "sea_green", "spring_green", "yellow_green",
+            };
+
+            int currentColor = previousColor;
+
+            do
+            {
+                currentColor = std::rand() % MAX_TWITCH_COLORS;
+            } while (currentColor == previousColor);
+
+            getHelix()->updateUserChatColor(
+                user->getUserId(), twitchColors[currentColor],
+                [twitchColors] {}, [twitchColors](auto error, auto message) {});
+
+            *previousValue = currentColor;
+        }
+    }
+}
+
 void TwitchIrcServer::onMessageSendRequested(TwitchChannel *channel,
                                              const QString &message, bool &sent)
 {
@@ -543,6 +599,8 @@ void TwitchIrcServer::onMessageSendRequested(TwitchChannel *channel,
 
     this->sendMessage(channel->getName(), message);
     sent = true;
+
+    usernameColorChangerUtil(&previousUsernameColorValue);
 }
 
 void TwitchIrcServer::onReplySendRequested(TwitchChannel *channel,
@@ -561,6 +619,8 @@ void TwitchIrcServer::onReplySendRequested(TwitchChannel *channel,
                          channel->getName() + " :" + message);
 
     sent = true;
+
+    usernameColorChangerUtil(&previousUsernameColorValue);
 }
 
 const BttvEmotes &TwitchIrcServer::getBttvEmotes() const

@@ -127,6 +127,8 @@ private:
     QTimer bulkLiveStatusTimer_;
 
     pajlada::Signals::SignalHolder signalHolder_;
+
+    int previousUsernameColorValue;
 };
 
 }  // namespace chatterino
