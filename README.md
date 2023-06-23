@@ -14,8 +14,13 @@ This is a fork of Chatterino 2 that enables extra features that aren't currently
 
 - Generate random username colors from a base color of choice (Example: Different shades of green or pink, etc.)
 
+### Downloads
+
+**Stable builds** can be downloaded from the [releases section](https://github.com/h0ud1n/chatterino2/releases/latest).
+
+To test new features, you can download the **nighly build** [here](https://github.com/h0ud1n/chatterino2/releases/tag/nightly-build).
+
 ## Original Chatterino 2 Readme
-============
 
 Chatterino 2 is a chat client for [Twitch.tv](https://twitch.tv).
 The Chatterino 2 wiki can be found [here](https://wiki.chatterino.com).
